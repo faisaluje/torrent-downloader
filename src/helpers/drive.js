@@ -9,8 +9,6 @@ function getGoogleAuth() {
   return OAuth2Client
 }
 
-getGoogleAuth()
-
 function getDrive() {
   const auth = getGoogleAuth()
 
