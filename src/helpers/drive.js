@@ -2,6 +2,8 @@ const { google } = require('googleapis')
 const { client_id, client_secret, redirect_uris } = require('../../credentials.json')
 const token = require('../../token.json')
 
+let auth
+
 function getGoogleAuth() {
   const OAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0])
   OAuth2Client.setCredentials(token)
@@ -10,7 +12,9 @@ function getGoogleAuth() {
 }
 
 function getDrive() {
-  const auth = getGoogleAuth()
+  if (!auth) {
+    auth = getGoogleAuth()
+  }
 
   return google.drive({ version: 'v3', auth })
 }
